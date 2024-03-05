@@ -1,0 +1,137 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Ventas') }}
+        </h2>
+    </x-slot>
+
+     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5">
+        <a href="{{ route('sales.index') }}" class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+            Regresar
+        </a>
+    </div>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class=" overflow-hidden shadow-xl sm:rounded-lg p-3">
+                <div class="flex items-center justify-center">
+                    <h2 class="text-3xl font-semibold">Crear datos para una Pantalla</h2>
+                </div>
+                <div class="my-5">
+                    <div class="relative overflow-x-auto ">
+                        <form action="{{ route('sales.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="mb-4">
+                                    <label for="brand" class="block text-gray-700 text-sm font-bold mb-2">Marca:</label>
+                                    {{-- apply input type select with option, the variable say $brands --}}
+                                    <select name="brand_id" id="brand" class="form-input rounded-md shadow-sm mt-1 block w-full">
+                                        <option value="">Seleccione una marca</option>
+                                        @foreach ($brands as $brand)
+                                            <option value="{{ $brand->id }}">{{ old("brand_id", $brand->name) }}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- show error --}}
+                                    @error('brand_id')
+                                        <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-4">
+                                    <label for="model" class="block text-gray-700 text-sm font-bold mb-2">Modelo:</label>
+                                    <input type="text" name="model" id="model" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('model') }}" />
+                                    {{-- show error --}}
+                                    @error('model')
+                                        <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-4">
+                                    <label for="model_year" class="block text-gray-700 text-sm font-bold mb-2">Año:</label>
+                                    {{-- apply a input type select from 1985 to now year --}}
+                                    <select name="model_year" id="model_year" class="form-input rounded-md shadow-sm mt-1 block w-full">
+                                        <option value="">Seleccione un año</option>
+                                        @for ($i = 1985; $i <= date('Y'); $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+
+                                    {{-- <input type="text" name="model_year" id="model_year" class="form-input rounded-lg" /> --}}
+                                    {{-- show error --}}
+                                    @error('model_year')
+                                        <span class="text-red-500 block">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-4">
+                                    <label for="version" class="block text-gray-700 text-sm font-bold mb-2">Version:</label>
+                                    <input type="text" name="version" id="version" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('version') }}" />
+                                    {{-- show error --}}
+                                    @error('version')
+                                        <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Precio(*Campo Opcional):</label>
+                                    <input type="text" name="price" id="price" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('price') }}" />
+                                </div>
+                                <div class="mb-4 col-span-2 hidden">
+                                    <label for="type" class="block text-gray-700 text-sm font-bold mb-2">Tipo:</label>
+                                    <input type="text" name="type"  id="version" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('type', "iluminación") }}" />
+                                    {{-- show error --}}
+                                    @error('version')
+                                        <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-4">
+                                    <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
+                                    <input type="file"  name="image" id="image" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('image') }}" />
+                                    {{-- show error --}}
+                                    @error('image')
+                                        <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-span-2 bg-white py-4 px-2 rounded-lg">
+                                    <h1 class="text-2xl font-semibold text-blue-800">Información del Productor</h1>
+                                    <div class="  p-4 rounded-lg grid w-full grid-cols-6 gap-3 ">
+                                            <div class="col-span-3">
+                                                <input type="text" name="productor_name" placeholder="Escriba el nombre" class="px-3 py-1 rounded-lg border focus:border-blue-500 w-full">
+                                            </div>
+                                            <div class="col-span-3">
+                                                <input type="text" name="productor_phone" placeholder="Escriba su número"  class="px-3 py-1 rounded-lg border focus:border-blue-500 w-full">
+                                            </div>
+                                            <div class="col-span-3">
+                                                <input type="text" name="productor_email" placeholder="Email"  class="px-3 py-1 rounded-lg border focus:border-blue-500 w-full">
+                                            </div>
+                                            <div class="col-span-3">
+                                                <input type="text" name="productor_website" placeholder="Página web - url"  class="px-3 py-1 rounded-lg border focus:border-blue-500 w-full">
+                                            </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="mb-4 col-span-2">
+                                    <label for="" class="block text-gray-700 text-sm font-bold mb-2">Descripción(*Campo Opcional):</label>
+                                    <textarea name="description"  id="editor" cols="30" rows="10" class="p-4">{{ old("description") }}</textarea>
+                                </div>
+                                <div class="">
+                                    <button type="submit" class="px-3 py-2 rounded-lg bg-blue-500 font-semibold text-white hover:bg-blue-700 transition ease">Crear una venta</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+
+    <script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+</x-app-layout>
