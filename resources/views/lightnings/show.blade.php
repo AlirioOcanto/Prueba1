@@ -29,11 +29,30 @@
                         <h3 class="px-4 py-2 rounded-full border-2 border-blue-500 w-auto  text-normal font-semibold">Versión: {{ $light->version }}</h3>
                         <h3 class="px-4 py-2 rounded-full border-2 border-blue-500 w-auto  text-normal font-semibold">Precio: ${{ $light->price }}</h3>
                     </div>
+                     <div class="flex flex-col gap-2 items-center">
+                        <h2 class="text-2xl text-blue-500">Información del productor:</h2>
+                        <span>Nombres: {{ $light->productor_name }} </span>
+                        <span>Email: {{ $light->productor_email }}</span>
+                        <span>Telefono: {{ $light->productor_phone }}</span>
+                        <span>Website: {{ $light->productor_website }}</span>
+                    </div>
+
                     <div class="">
                         <h2>Detalles:</h2>
                     </div>
                     <p>{!! $light->description !!}</p>
                 </div>
+
+                   <div class="">
+                        <h3 class="text-3xl font-semibold  mt-3">Imagénes:</h3>
+                        <div class="grid grid-cols-6 gap-3 ">
+                            @foreach ($light->photos as $image)
+                                <div class="col-span-6 sm:col-span-3 md:col-span-2 lg:col-span-2">
+                                    <img src="{{ asset('storage/' . $image->path) }}"  class="w-full h-60 object-contain">
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
 
 
                 <div class="p-2 rounded-lg bg-white mt-5">
@@ -49,28 +68,19 @@
                                         @csrf
                                         <button type="submit" class="px-2 py-1 rounded-full bg-red-500 hover:bg-red-950 transition ease text-white">Eliminar</button>
                                     </form>
-
                                     {{-- <a href="" class="px-2 py-1 rounded-full bg-red-500 hover:bg-red-950 transition ease text-white">Eliminar</a> --}}
                                 </div>
                                 </div>
                                 <p>{!! $light->detail->description !!}</p>
                             @else
+                            <div class="flex gap-3 items-center">
                                 <h2 class="text-3xl font-semibold text-blue-500">No hay información de Instalación</h2>
-                                <a href="{{ route('lightning.instalation', $light) }}" class="px-2 py-1 rounded-full bg-blue-500 hover:bg-blue-700 transition ease text-white text-sm">Agregar</a>
+                                <a href="{{ route('lightning.instalation', $light) }}" class="px-2 py-1 block w-auto rounded-full bg-blue-500 hover:bg-blue-700 transition ease text-white text-sm">Agregar</a>
+                            </div>
                             @endif
+                        </div>
+                    </div>
 
-                        </div>
-                    </div>
-                    <div class="">
-                        <h3 class="text-3xl font-semibold  mt-3">Imagénes:</h3>
-                        <div class="grid grid-cols-6 gap-3 ">
-                            @foreach ($light->photos as $image)
-                                <div class="col-span-6 sm:col-span-3 md:col-span-2 lg:col-span-2">
-                                    <img src="{{ asset('storage/' . $image->path) }}"  class="w-full h-60 object-contain">
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

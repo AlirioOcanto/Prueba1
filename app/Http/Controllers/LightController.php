@@ -51,6 +51,10 @@ class LightController extends Controller
             'brand' => $request->brand,
             'brand_id' => $request->brand_id,
             'image' => $path,
+            'productor_name' => $request->productor_name,
+            'productor_phone' => $request->productor_phone,
+            'productor_email' => $request->productor_email,
+            'productor_website' => $request->productor_website,
         ]);
         // dd($light);
 

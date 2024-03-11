@@ -98,6 +98,8 @@
                                         <option value="" disabled>Seleccione un estado</option>
                                         <option value="pending">Pendiente</option>
                                         <option value="completed">Completado</option>
+                                        {{-- canceled --}}
+                                        <option value="canceled">Cancelado</option>
                                     </select>
                                     {{-- show error --}}
                                     @error('status')
@@ -121,7 +123,7 @@
                                     <textarea name="description"  id="editor" cols="30" rows="10" class="p-4">{{ old("description") }}</textarea>
                                 </div>
                                 <div class="">
-                                    <button type="submit" class="px-3 py-2 rounded-lg bg-blue-500 font-semibold text-white hover:bg-blue-700 transition ease">Crear una venta</button>
+                                    <button type="submit" class="px-3 py-2 rounded-lg bg-blue-500 font-semibold text-white hover:bg-blue-700 transition ease">Crear</button>
                                 </div>
                             </div>
                         </form>

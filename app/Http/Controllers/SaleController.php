@@ -57,7 +57,11 @@ class SaleController extends Controller
             'price' => $request->price,
             'type' => $request->type,
             'description' => $request->description,
-            'image' => $path
+            'image' => $path,
+            'productor_name' => $request->productor_name,
+            'productor_email' => $request->productor_email,
+            'productor_phone' => $request->productor_phone,
+            'productor_website' => $request->productor_website,
         ]);
 
         return redirect()->route('sales.index');
@@ -100,9 +104,7 @@ class SaleController extends Controller
         $sale->type = $request->type;
         $sale->description = $request->description;
         $sale->save();
-
-
-        return redirect()->route('sales.index');
+        return redirect()->route('sales.list');
     }
 
     public function destroy(Sale $sale)

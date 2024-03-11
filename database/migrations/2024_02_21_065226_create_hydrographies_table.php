@@ -14,10 +14,6 @@ return new class extends Migration
         Schema::create('hydrographies', function (Blueprint $table) {
             $table->id();
             $table->string('image');
-            $table->string('productor_name')->nullable();
-            $table->string('productor_phone')->nullable();
-            $table->string('productor_email')->nullable();
-            $table->string('productor_website')->nullable();
             $table->string('type');
             $table->timestamps();
         });

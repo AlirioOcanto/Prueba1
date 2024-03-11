@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Illumination extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'price', 'light_id', 'model', 'brand_id', 'model_year', 'version', 'image'];
+    protected $fillable = ['name', 'description', 'price', 'light_id', 'model', 'brand_id', 'model_year', 'version', 'image', 'productor_name',
+        'productor_phone',
+        'productor_email',
+        'productor_website',];
 
 
     public function light()

@@ -14,7 +14,7 @@
         </a>
     </div>
 
-    <div class="py-12 flex mx-24">
+    <div class="py-12 flex flex-col md:flex-row mx-24">
         <div class="p-3 rounded-lg shadow-lg bg-white h-auto">
             <form method="POST" action="{{route('lightning.search')}}" class="">
                 @csrf

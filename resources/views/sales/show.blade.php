@@ -18,6 +18,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class=" overflow-hidden shadow-xl sm:rounded-lg p-3">
                 <div class="my-5">
+                    <div class="">
+                        <a href="{{ route('sales.instalation', $sale) }}" class="px-3 py-2 rounded-full bg-slate-950 text-white font-semibold hover:bg-blue-500 transition ease">Agregar Instalación</a>
+                    </div>
+
                     <h1 class="text-4xl text-orange-600 font-semibold text-center">{{ $sale->brand->name }}</h1>
                     <div class="flex items-center gap-3 justify-center my-5">
                         <h2 class="px-4 py-2 rounded-full border-2 border-blue-500 w-auto  text-normal font-semibold">Modelo: {{ $sale->model }}</h2>
@@ -25,10 +29,27 @@
                         <h3 class="px-4 py-2 rounded-full border-2 border-blue-500 w-auto  text-normal font-semibold">Versión: {{ $sale->version }}</h3>
                         <h3 class="px-4 py-2 rounded-full border-2 border-blue-500 w-auto  text-normal font-semibold">Precio: ${{ $sale->price }}</h3>
                     </div>
+                    <div class="flex flex-col gap-2 items-center">
+                        <h2 class="text-2xl text-blue-500">Información del productor:</h2>
+                        <span>Nombres: {{ $sale->productor_name }} </span>
+                        <span>Email: {{ $sale->productor_email }}</span>
+                        <span>Telefono: {{ $sale->productor_phone }}</span>
+                        <span>Website: {{ $sale->productor_website }}</span>
+                    </div>
                     <div class="">
                         <h2 class="text-2xl text-blue-500">Descripción:</h2>
                     </div>
                     <p>{!! $sale->description !!}</p>
+                </div>
+
+                 <div class="mt-10">
+                    <div class="grid grid-cols-6 gap-3">
+                        @foreach ($sale->images as $image)
+                            <div class="col-span-6 sm:col-span-3 md:col-span-2 lg:col-span-2">
+                                <img src="{{ asset('storage/' . $image->path) }}" alt="{{ $sale->brand->name }}" class="w-full h-60 object-cover">
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
 
                 {{-- show if $sale->instalation->description is not null --}}
@@ -50,15 +71,7 @@
                     </div>
                     {!! $sale->instalation->description !!}
                 </div>
-                 <div class="mt-10">
-                    <div class="grid grid-cols-6 gap-3">
-                        @foreach ($sale->images as $image)
-                            <div class="col-span-6 sm:col-span-3 md:col-span-2 lg:col-span-2">
-                                <img src="{{ asset('storage/' . $image->path) }}" alt="{{ $sale->brand->name }}" class="w-full h-60 object-cover">
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
+
                 @else()
                     <div class="mt-10">
                         <h2 class="text-2xl text-blue-500">No hay contenido de instalación</h2>

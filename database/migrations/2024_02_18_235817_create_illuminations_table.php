@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('productor_phone')->nullable();
             $table->string('productor_email')->nullable();
             $table->string('productor_website')->nullable();
+
             // path to image
             $table->string('image');
             $table->text('description')->nullable();

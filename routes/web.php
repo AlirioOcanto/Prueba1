@@ -111,10 +111,15 @@ Route::middleware([
     Route::post('/calendar/illuminations', [CalendarController::class, "storeIlluminations"])->name('calendar.illuminations.store');
     Route::get('/calendar/hidrografia/create', [CalendarController::class, "createHydrography"])->name('calendar.hidrografia.create');
     Route::post('/calendar/hidrografia', [CalendarController::class, "storeHydrography"])->name('calendar.hidrografia.store');
+    Route::get('/calendar/hidrografia/list', [CalendarController::class, "listHydrography"])->name('calendar.hidrografia.list');
+    Route::get('/calendar/hidrografia/edit/{calendar}', [CalendarController::class, "editHydrography"])->name('calendar.hidrografia.edit');
     Route::get('/calendar/screens/list', [CalendarController::class, "listScreens"])->name('calendar.screens.list');
     Route::get('/date/illumination/list', [DateController::class, "listDate"])->name('date.illumination.list');
     Route::put('/date/illumination/{date}', [DateController::class, "update"])->name('date.illumination.update');
     Route::delete('/date/illumination/{date}', [DateController::class, "destroy"])->name('date.illumination.destroy');
+    Route::put('/calendar/screens/{calendar}', [CalendarController::class, "update"])->name('calendar.screens.update');
+    Route::put('/calendar/hidrografia/{calendar}', [CalendarController::class, "updateHydrography"])->name('calendar.hidrografia.update');
+    Route::delete('/calendar/hidrografia/{calendar}', [CalendarController::class, "destroyHydrography"])->name('calendar.hidrografia.destroy');
     // search date by query
     Route::get('/date/illumination/search', [DateController::class, "search"])->name('date.illumination.search');
     Route::get('/calendar/screens/search', [CalendarController::class, "search"])->name('calendar.screens.search');

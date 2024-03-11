@@ -12,7 +12,7 @@
                   <h1 class="text-2xl font-semibold">Agregar un producto a: </h1>
                  {{-- <a href="{{ route('sales.list') }}">Ver todas las ventas</a> --}}
             </div>
-                <div class="grid grid-cols-6 gap-3 my-3">
+                <div class="grid md:grid-cols-6 md:gap-3 gap-5 my-3">
                     <div class="col-span-2 w-full flex flex-col gap-3">
                         <a href="{{ route('sales.create') }}" class="bg-green-500 w-full block hover:bg-green-700 text-white font-bold py-2 px-4 rounded col-span-2">Pantallas</a>
                         <a href="{{ route('sales.list') }}" class="text-sm block text-blue-500 font-semibold  transition ease">Ver todos los productos</a>

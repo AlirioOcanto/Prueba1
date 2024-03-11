@@ -35,7 +35,7 @@
                                     @enderror
                                 </div>
                                 <div class="">
-                                    <button type="submit" class="px-3 py-2 rounded-lg bg-blue-500 font-semibold text-white hover:bg-blue-700 transition ease">Crear una venta</button>
+                                    <button type="submit" class="px-3 py-2 rounded-lg bg-blue-500 font-semibold text-white hover:bg-blue-700 transition ease">Crear</button>
                                 </div>
                             </div>
                         </form>

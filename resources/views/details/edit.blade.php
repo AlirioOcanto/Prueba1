@@ -36,7 +36,7 @@
                                     @enderror
                                 </div>
                                 <div class="">
-                                    <button type="submit" class="px-3 py-2 rounded-lg bg-blue-500 font-semibold text-white hover:bg-blue-700 transition ease">Guardar cambios</button>
+                                    <button type="submit" class="px-3 py-2 rounded-lg bg-yellow-500 font-semibold text-white hover:bg-yellow-700 transition ease">Guardar cambios</button>
                                 </div>
                             </div>
                         </form>

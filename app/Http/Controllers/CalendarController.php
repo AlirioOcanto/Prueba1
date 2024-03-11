@@ -178,8 +178,54 @@ class CalendarController extends Controller
         ]);
     }
 
+    public function update(Calendar $calendar, Request $request) {
+        // dd($calendar);
+        $data = request()->all();
+        // dd($data);
+        $calendar->update($data);
+        // send flash message to the view
+        session()->flash('success', 'Información actualizada correctamente');
+        return redirect()->route('calendar.index');
+    }
 
 
+    public function listHydrography() {
+        $users = Reunion::paginate(15);
+        // dd($products);
+        // dd($users);
+        return view('calendar.hidrografia-calendar-list', [
+            'users' => $users
+        ]);
+    }
+
+    public function editHydrography(Reunion $calendar) {
+        // dd($calendar);
+        $products = Hydrography::all();
+
+        return view('calendar.hidrografia-calendar-edit', [
+            'reunion' => $calendar,
+            'products' => $products
+        ]);
+    }
+
+    public function updateHydrography(Reunion $calendar, Request $request) {
+        // dd($calendar);
+        $data = request()->all();
+        // dd($data);
+        $calendar->update($data);
+        // send flash message to the view
+        session()->flash('success', 'Información actualizada correctamente');
+        return redirect()->route('calendar.hidrografia.list');
+    }
+
+
+    public function destroyHydrography(Reunion $calendar) {
+        // dd($calendar);
+        $calendar->delete();
+        // send flash message to the view
+        session()->flash('success', 'Información eliminada correctamente');
+        return redirect()->route('calendar.hidrografia.list');
+    }
 }
 
 

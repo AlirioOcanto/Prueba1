@@ -42,7 +42,7 @@
                     </div>
                     <div class="flex flex-col gap-2">
                         <a href="{{ route('calendar.hidrografia.create') }}" class="px-4 py-2 bg-blue-500 text-white font-semibold hover:bg-blue-700 transition ease rounded-lg">Agendar una Hidrografía</a>
-                        <a href="" class="text-center">Ver todos</a>
+                        <a href="{{ route('calendar.hidrografia.list') }}" class="text-center">Ver todos</a>
                     </div>
                 </div>
             </div>

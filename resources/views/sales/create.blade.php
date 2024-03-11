@@ -24,8 +24,8 @@
                     <div class="relative overflow-x-auto ">
                         <form action="{{ route('sales.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="mb-4">
+                            <div class="grid lg:grid-cols-2 gap-4">
+                                <div class="mb-4 col-span-2 lg:col-span-1">
                                     <label for="brand" class="block text-gray-700 text-sm font-bold mb-2">Marca:</label>
                                     {{-- apply input type select with option, the variable say $brands --}}
                                     <select name="brand_id" id="brand" class="form-input rounded-md shadow-sm mt-1 block w-full">
@@ -39,7 +39,7 @@
                                         <span class="text-red-500">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="mb-4">
+                                <div class="mb-4 col-span-2 lg:col-span-1">
                                     <label for="model" class="block text-gray-700 text-sm font-bold mb-2">Modelo:</label>
                                     <input type="text" name="model" id="model" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('model') }}" />
                                     {{-- show error --}}

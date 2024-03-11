@@ -99,6 +99,8 @@
                                         <option value="" disabled>Seleccione un estado</option>
                                         <option value="pending">Pendiente</option>
                                         <option value="completed">Completado</option>
+                                        {{-- canceled --}}
+                                        <option value="canceled">Cancelado</option>
                                     </select>
                                     {{-- show error --}}
                                     @error('status')

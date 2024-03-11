@@ -79,9 +79,6 @@
                                             <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
                                     </select>
-
-
-
                                     {{-- <input type="text" name="model_year" id="model_year" class="form-input rounded-lg" /> --}}
                                     {{-- show error --}}
                                     @error('model_year')
@@ -122,6 +119,25 @@
                                         <span class="text-red-500">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+                                <div class="col-span-2 bg-white py-4 px-2 rounded-lg">
+                                    <h1 class="text-2xl font-semibold text-blue-800">Información del Productor</h1>
+                                    <div class="  p-4 rounded-lg grid w-full grid-cols-6 gap-3 ">
+                                            <div class="col-span-3">
+                                                <input type="text" name="productor_name" placeholder="Escriba el nombre" class="px-3 py-1 rounded-lg border focus:border-blue-500 w-full">
+                                            </div>
+                                            <div class="col-span-3">
+                                                <input type="text" name="productor_phone" placeholder="Escriba su número"  class="px-3 py-1 rounded-lg border focus:border-blue-500 w-full">
+                                            </div>
+                                            <div class="col-span-3">
+                                                <input type="text" name="productor_email" placeholder="Email"  class="px-3 py-1 rounded-lg border focus:border-blue-500 w-full">
+                                            </div>
+                                            <div class="col-span-3">
+                                                <input type="text" name="productor_website" placeholder="Página web - url"  class="px-3 py-1 rounded-lg border focus:border-blue-500 w-full">
+                                            </div>
+                                    </div>
+                                </div>
+
                                 <div class="mb-4 col-span-2">
                                     <label for="" class="block text-gray-700 text-sm font-bold mb-2">Descripción(*Campo Opcional):</label>
                                     <textarea name="description"  id="editor" cols="30" rows="10" class="p-4">{{ old("description") }}</textarea>

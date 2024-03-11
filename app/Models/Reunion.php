@@ -21,4 +21,10 @@ class Reunion extends Model
         'status',
         'hydrographies_id',
     ];
+
+    public function hydrography()
+    {
+        return $this->belongsTo(Hydrography::class);
+    }
+
 }

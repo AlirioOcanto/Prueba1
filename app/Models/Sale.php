@@ -18,6 +18,10 @@ class Sale extends Model
         'type',
         'description',
         'image',
+        'productor_name',
+        'productor_phone',
+        'productor_email',
+        'productor_website',
     ];
 
     public function brand()

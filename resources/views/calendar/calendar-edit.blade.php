@@ -22,20 +22,22 @@
                 </div>
                 <div class="my-5">
                     <div class="relative overflow-x-auto ">
-                        <form action="{{ route('calendar.screens.store') }}" method="POST" >
+                        <form action="{{ route('calendar.screens.update', $calendar) }}" method="POST" >
+                            @method('PUT')
                             @csrf
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="mb-4">
                                     <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Título Breve:</label>
-                                    <input type="text" name="title" id="title" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('title') }}" placeholder="Instalación de xxx en Maryland" />
+                                    <input type="text" name="title" id="title" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('title', $calendar->title) }}" placeholder="Instalación de xxx en Maryland" />
                                     {{-- show error --}}
                                     @error('title')
                                         <span class="text-red-500">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                {{-- @dd($calendar) --}}
                                 <div class="mb-4">
                                     <label for="day" class="block text-gray-700 text-sm font-bold mb-2">Fecha:</label>
-                                    <input type="date" name="day" id="day" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('day') }}" />
+                                    <input type="date" name="day" id="day" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('day', $calendar->day) }}" />
                                     {{-- show error --}}
                                     @error('day')
                                         <span class="text-red-500">{{ $message }}</span>
@@ -43,7 +45,7 @@
                                 </div>
                                 <div class="mb-4">
                                     <label for="user_name" class="block text-gray-700 text-sm font-bold mb-2">Nombre del Cliente:</label>
-                                    <input type="text" name="user_name" id="user_name" class="form-input rounded-lg" />
+                                    <input type="text" name="user_name" id="user_name" value="{{ old('user_name', $calendar->user_name) }}" class="form-input rounded-lg" />
                                     {{-- show error --}}
                                     @error('user_name')
                                         <span class="text-red-500 block">{{ $message }}</span>
@@ -51,7 +53,7 @@
                                 </div>
                                 <div class="mb-4">
                                     <label for="user_email" class="block text-gray-700 text-sm font-bold mb-2">Email del cliente:</label>
-                                    <input type="text" name="user_email" id="user_email" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('user_email') }}" />
+                                    <input type="text" name="user_email" id="user_email" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('user_email', $calendar->user_email) }}" />
                                     {{-- show error --}}
                                     @error('user_email')
                                         <span class="text-red-500">{{ $message }}</span>
@@ -61,7 +63,7 @@
 
                                 <div class="mb-4 col-span-2">
                                     <label for="user_phone" class="block text-gray-700 text-sm font-bold mb-2">Número del Ciente:</label>
-                                    <input type="text" name="user_phone"  id="user_phone" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('user_phone') }}" />
+                                    <input type="text" name="user_phone"  id="user_phone" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('user_phone', $calendar->user_phone) }}" />
                                     {{-- show error --}}
                                     @error('user_phone')
                                         <span class="text-red-500">{{ $message }}</span>
@@ -70,7 +72,7 @@
 
                                 <div class="mb-4 col-span-2">
                                     <label for="user_address" class="block text-gray-700 text-sm font-bold mb-2">Dirección del Ciente:</label>
-                                    <input type="text" name="user_address"  id="user_address" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('user_address') }}" />
+                                    <input type="text" name="user_address"  id="user_address" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('user_address', $calendar->user_address) }}" />
                                     {{-- show error --}}
                                     @error('user_address')
                                         <span class="text-red-500">{{ $message }}</span>
@@ -81,9 +83,9 @@
                                     <label for="brand" class="block text-gray-700 text-sm font-bold mb-2">Seleccionar el producto:</label>
                                     {{-- apply input type select with option, the variable say $brands --}}
                                     <select name="sales_id" id="brand" class="form-input rounded-md shadow-sm mt-1 block w-full">
-                                        <option value="">Seleccione una marca</option>
+                                        <option value="" disabled>Seleccione una marca</option>
                                         @foreach ($products as $brand)
-                                            <option value="{{ $brand->id }}">{{ $brand->brand->name }} - {{ $brand->model }}</option>
+                                            <option value="{{ $brand->id }}" @selected($brand->brand->name === $brand->model) >{{ $brand->brand->name }} - {{ $brand->model }}</option>
                                         @endforeach
                                     </select>
                                     {{-- show error --}}
@@ -97,8 +99,9 @@
                                     <label for="status" class="block text-gray-700 text-sm font-bold mb-2">Estado:</label>
                                     <select name="status" id="status" class="form-input rounded-md shadow-sm mt-1 block w-full">
                                         <option value="" disabled>Seleccione un estado</option>
-                                        <option value="pending">Pendiente</option>
-                                        <option value="completed">Completado</option>
+                                        <option value="pending" @selected($calendar->status === "pending")>Pendiente</option>
+                                        <option value="completed" @selected($calendar->status === "completed") >Completado</option>
+                                        <option value="completed" @selected($calendar->status === "canceled") >Cancelado</option>
                                     </select>
                                     {{-- show error --}}
                                     @error('status')
@@ -109,7 +112,7 @@
                                 {{-- create input type text to billing --}}
                                 <div class="mb-4">
                                     <label for="billing" class="block text-gray-700 text-sm font-bold mb-2">Facturación($):</label>
-                                    <input type="text" placeholder="$100.00" name="billing" id="billing" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('billing') }}" />
+                                    <input type="text" placeholder="$100.00" name="billing" id="billing" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('billing', $calendar->billing) }}" />
                                     {{-- show error --}}
                                     @error('billing')
                                         <span class="text-red-500">{{ $message  }}</span>
@@ -118,10 +121,10 @@
 
                                 <div class="mb-4 col-span-2">
                                     <label for="" class="block text-gray-700 text-sm font-bold mb-2">Descripción:</label>
-                                    <textarea name="description"  id="editor" cols="30" rows="10" class="p-4">{{ old("description") }}</textarea>
+                                    <textarea name="description"  id="editor" cols="30" rows="10" class="p-4">{{ old("description", $calendar->description) }}</textarea>
                                 </div>
                                 <div class="">
-                                    <button type="submit" class="px-3 py-2 rounded-lg bg-blue-500 font-semibold text-white hover:bg-blue-700 transition ease">Agendar</button>
+                                    <button type="submit" class="px-3 py-2 rounded-lg bg-yellow-500 font-semibold text-white hover:bg-yellow-700 transition ease">Editar</button>
                                 </div>
                             </div>
                         </form>
